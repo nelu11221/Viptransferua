@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+*.local
+
+# Source media, kept out of the repo — the optimised copies that the site
+# actually serves live in public/gif_scroll and public/fleet.
+/gif_scroll
+/parc_auto
+
+.DS_Store
+*.log
+npm-debug.log*
+.vscode/*
+!.vscode/extensions.json
+.idea
