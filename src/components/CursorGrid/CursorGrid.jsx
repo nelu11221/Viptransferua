@@ -258,14 +258,22 @@ const CursorGrid = ({
     rebuild();
     wake();
 
-    container.addEventListener('pointermove', onPointerMove);
-    container.addEventListener('pointerdown', onPointerDown);
+    // There is no cursor to follow on a touch screen: the reactive layer would
+    // only fire on taps and drags over the banner, spinning up the rAF loop for
+    // an effect nobody asked for. The static lattice is still painted above.
+    const pointerAware = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (pointerAware) {
+      container.addEventListener('pointermove', onPointerMove);
+      container.addEventListener('pointerdown', onPointerDown);
+    }
 
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
-      container.removeEventListener('pointermove', onPointerMove);
-      container.removeEventListener('pointerdown', onPointerDown);
+      if (pointerAware) {
+        container.removeEventListener('pointermove', onPointerMove);
+        container.removeEventListener('pointerdown', onPointerDown);
+      }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cellSize]);

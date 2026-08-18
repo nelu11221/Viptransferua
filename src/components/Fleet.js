@@ -52,8 +52,11 @@ export default function Fleet() {
                 alt=""
                 width="1600"
                 height="893"
-                loading="eager"
-                fetchPriority={i === 0 ? 'high' : 'low'}
+                /* Gallery sits well below the fold and the seven photos total
+                   ~1.6 MB — eager loading made them compete with the hero
+                   frames for bandwidth on mobile data. */
+                loading="lazy"
+                fetchPriority="low"
                 decoding="async"
               />
             </figure>

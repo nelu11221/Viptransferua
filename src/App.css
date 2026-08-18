@@ -2,6 +2,12 @@
    Transport — global tokens & reset
    ========================================================================== */
 
+/* Hover styling is wrapped in `@media (hover: hover) and (pointer: fine)`
+   throughout this file. Touch browsers emulate :hover on tap and leave it
+   applied until the next tap elsewhere, so an unguarded rule leaves cards
+   lifted and buttons highlighted long after the finger is gone. Phones get
+   :active feedback instead. */
+
 :root {
   --navy-900: #071426;
   --navy-800: #0b1b33;
@@ -48,6 +54,12 @@ body {
   padding: 0;
 }
 
+/* The header is fixed, so an untreated #anchor jump parks the section heading
+   underneath it. Reserve the pill's height plus a little air. */
+html {
+  scroll-padding-top: 104px;
+}
+
 body {
   font-family: var(--font);
   color: var(--ink);
@@ -80,6 +92,9 @@ ul {
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
+  /* Note: this shorthand also zeroes the vertical padding of elements that are
+     both .container and something else. The footer rules below compensate with
+     a more specific selector; the hero relies on the reset for its centring. */
   padding: 0 24px;
 }
 
@@ -105,10 +120,6 @@ ul {
   font-weight: 700;
 }
 
-.btn--primary:hover {
-  background: var(--accent-dark);
-}
-
 .btn--primary:active {
   transform: translateY(1px);
 }
@@ -120,8 +131,14 @@ ul {
   padding: 9px 18px;
 }
 
-.btn--ghost:hover {
-  background: rgba(255, 255, 255, 0.12);
+@media (hover: hover) and (pointer: fine) {
+  .btn--primary:hover {
+    background: var(--accent-dark);
+  }
+
+  .btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
 }
 
 /* ==========================================================================
@@ -188,9 +205,11 @@ ul {
   transition: color 0.16s ease, border-color 0.16s ease;
 }
 
-.nav__link:hover {
-  color: var(--navy-800);
-  border-color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .nav__link:hover {
+    color: var(--navy-800);
+    border-color: var(--accent);
+  }
 }
 
 .nav__actions {
@@ -219,8 +238,10 @@ ul {
   padding: 12px 24px;
 }
 
-.btn--dark:hover {
-  background: var(--navy-700);
+@media (hover: hover) and (pointer: fine) {
+  .btn--dark:hover {
+    background: var(--navy-700);
+  }
 }
 
 /* Language switcher ------------------------------------------------------ */
@@ -241,10 +262,6 @@ ul {
   font-size: 0.9rem;
   font-weight: 500;
   transition: background-color 0.16s ease;
-}
-
-.lang__trigger:hover {
-  background: #eaeef4;
 }
 
 /* SVG flags, not emoji: they need explicit sizing. */
@@ -287,10 +304,6 @@ ul {
   text-align: start;
 }
 
-.lang__option:hover {
-  background: var(--surface-2);
-}
-
 .lang__option.is-active {
   font-weight: 600;
 }
@@ -302,8 +315,18 @@ ul {
   color: #fff;
 }
 
-.footer .lang__trigger:hover {
-  background: rgba(255, 255, 255, 0.18);
+@media (hover: hover) and (pointer: fine) {
+  .lang__trigger:hover {
+    background: #eaeef4;
+  }
+
+  .lang__option:hover {
+    background: var(--surface-2);
+  }
+
+  .footer .lang__trigger:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
 }
 
 /* ==========================================================================
@@ -502,9 +525,11 @@ ul {
   transition: color 0.16s ease, border-color 0.16s ease;
 }
 
-.hero__phone:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .hero__phone:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
 }
 
 .hero__note {
@@ -614,12 +639,14 @@ ul {
   transition: filter 0.16s ease, transform 0.12s ease;
 }
 
-.channel:hover {
-  filter: brightness(1.08);
-}
-
 .channel:active {
   transform: translateY(1px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .channel:hover {
+    filter: brightness(1.08);
+  }
 }
 
 .channel__icon {
@@ -691,9 +718,11 @@ ul {
   font-size: 0.88rem;
 }
 
-.btn--outline:hover {
-  border-color: var(--navy-700);
-  background: var(--surface-2);
+@media (hover: hover) and (pointer: fine) {
+  .btn--outline:hover {
+    border-color: var(--navy-700);
+    background: var(--surface-2);
+  }
 }
 
 /* ==========================================================================
@@ -838,10 +867,6 @@ ul {
   transform: none;
 }
 
-.gallery__item:hover {
-  box-shadow: 0 26px 50px -28px rgba(7, 20, 38, 0.75);
-}
-
 .gallery__img {
   width: 100%;
   height: 100%;
@@ -851,8 +876,14 @@ ul {
   transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-.gallery__item:hover .gallery__img {
-  transform: scale(1.05);
+@media (hover: hover) and (pointer: fine) {
+  .gallery__item:hover {
+    box-shadow: 0 26px 50px -28px rgba(7, 20, 38, 0.75);
+  }
+
+  .gallery__item:hover .gallery__img {
+    transform: scale(1.05);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -910,10 +941,12 @@ ul {
   transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.vehicle:hover {
-  border-color: var(--navy-700);
-  transform: translateY(-3px);
-  box-shadow: 0 18px 34px -22px rgba(7, 20, 38, 0.5);
+@media (hover: hover) and (pointer: fine) {
+  .vehicle:hover {
+    border-color: var(--navy-700);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px -22px rgba(7, 20, 38, 0.5);
+  }
 }
 
 .vehicle__icon {
@@ -1095,9 +1128,11 @@ ul {
   transition: border-color 0.16s ease, transform 0.16s ease;
 }
 
-.route:hover {
-  border-color: var(--navy-700);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .route:hover {
+    border-color: var(--navy-700);
+    transform: translateY(-2px);
+  }
 }
 
 .route__path {
@@ -1295,7 +1330,10 @@ ul {
   padding: 64px 0 0;
 }
 
-.footer__inner {
+/* Both blocks are also .container, whose `padding` shorthand would reset the
+   vertical padding below 560px — the link list ended up flush against the
+   copyright rule on phones. The extra .footer wins on specificity instead. */
+.footer .footer__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
   gap: 48px;
@@ -1334,11 +1372,13 @@ ul {
   transition: color 0.16s ease;
 }
 
-.footer__column a:hover {
-  color: var(--accent);
+@media (hover: hover) and (pointer: fine) {
+  .footer__column a:hover {
+    color: var(--accent);
+  }
 }
 
-.footer__bottom {
+.footer .footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 22px;
   padding-bottom: 22px;
@@ -1458,7 +1498,8 @@ ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .footer__inner {
+  /* Matches the specificity of the base .footer .footer__inner rule. */
+  .footer .footer__inner {
     grid-template-columns: minmax(0, 1fr);
     gap: 36px;
   }
@@ -1562,6 +1603,17 @@ ul {
 
   .footer__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Footer links are an 18px-tall line of text — below the 24px minimum for a
+     touch target. Padding grows the tap area without moving the text. */
+  .footer__column a {
+    display: inline-block;
+    padding-block: 4px;
+  }
+
+  .footer__column ul {
+    gap: 4px;
   }
 }
 
