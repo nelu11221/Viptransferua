@@ -248,6 +248,10 @@ ul {
 
 .lang {
   position: relative;
+  /* Hug the trigger. As a block this box stretched to the full width of the
+     footer column, and since the menu is end-aligned to it, the menu detached
+     from the button and sat over the link columns. */
+  display: inline-block;
 }
 
 .lang__trigger {
@@ -306,6 +310,15 @@ ul {
 
 .lang__option.is-active {
   font-weight: 600;
+}
+
+/* End-aligning the menu only works where the trigger sits at the end of its
+   row, which is the desktop header. In the footer column and in the open
+   mobile nav panel the trigger sits at the start, and a 190px menu hung from
+   its end edge ran off the left of the screen — so anchor it to the start. */
+.footer .lang__menu,
+.nav.is-open .lang__menu {
+  inset-inline: 0 auto;
 }
 
 /* Dark surfaces (footer) keep the original translucent treatment. */
