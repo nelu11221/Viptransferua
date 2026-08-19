@@ -322,6 +322,13 @@ ul {
   inset-inline: 0 auto;
 }
 
+/* The footer trigger is near the bottom of the page, where a menu dropped
+   below it hangs past the end of the footer. Open upwards from there. */
+.footer .lang__menu {
+  top: auto;
+  bottom: calc(100% + 8px);
+}
+
 /* Dark surfaces (footer) keep the original translucent treatment. */
 .footer .lang__trigger {
   background: rgba(255, 255, 255, 0.1);
