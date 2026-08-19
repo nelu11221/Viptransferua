@@ -1,14 +1,16 @@
 import { LuArrowRight } from 'react-icons/lu'
-import { ROUTE_CITIES } from '../data/content.js'
+import { CHANNELS, ROUTE_CITIES } from '../data/content.js'
 import { useLanguage } from '../i18n/LanguageContext.js'
 import { money } from '../i18n/format.js'
 import SectionHead from './SectionHead.js'
+
+const WHATSAPP = CHANNELS.find((c) => c.id === 'whatsapp').href
 
 function Route({ from, to, price }) {
   const { t, language } = useLanguage()
 
   return (
-    <a className="route" href="#top">
+    <a className="route" href={WHATSAPP} target="_blank" rel="noreferrer">
       <span className="route__path">
         <span className="route__from">{t.routes.cities[from]}</span>
         <LuArrowRight className="route__arrow" aria-hidden="true" />

@@ -639,7 +639,7 @@ ul {
 }
 
 /* ==========================================================================
-   Contact channels (WhatsApp / Viber / Telegram)
+   Contact channels (WhatsApp / Instagram / Telegram)
    ========================================================================== */
 
 .channels {
@@ -687,8 +687,10 @@ ul {
   color: #05301a;
 }
 
-.channel--viber {
-  background: #7360f2;
+/* Instagram has no single brand colour — the gradient is the mark. Angled the
+   same way as the app icon so it reads as Instagram at a glance. */
+.channel--instagram {
+  background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
 }
 
 .channel--telegram {

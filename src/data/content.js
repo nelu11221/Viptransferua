@@ -8,15 +8,20 @@ export const HERO_MEDIA = {
   maxFrames: 400,
 }
 
-// Drives the tel: link, the WhatsApp deep link and the Viber one, so it has to
-// stay in E.164 (no spaces). PHONE_DISPLAY is the grouped version shown to the
-// reader. The Telegram handle below is still the placeholder one.
+// Drives the tel: link, so it has to stay in E.164 (no spaces).
+// PHONE_DISPLAY is the grouped version shown to the reader.
 export const PHONE = '+37360133594'
 export const PHONE_DISPLAY = '+373 60 133 594'
 
+// WhatsApp is the account's own short link rather than a wa.me/<number> one,
+// so it stays correct even if PHONE changes. The Telegram handle is still the
+// placeholder one.
 export const CHANNELS = [
-  { id: 'whatsapp', href: `https://wa.me/${PHONE.replace('+', '')}` },
-  { id: 'viber', href: `viber://chat?number=${encodeURIComponent(PHONE)}` },
+  { id: 'whatsapp', href: 'https://wa.me/message/EFS3IQ57CZJ2L1' },
+  {
+    id: 'instagram',
+    href: 'https://www.instagram.com/luxtransferua?igsh=aDJxN2wwYXRlOWI4',
+  },
   { id: 'telegram', href: 'https://t.me/transporttransfers' },
 ]
 

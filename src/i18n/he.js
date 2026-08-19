@@ -21,7 +21,7 @@ export default {
 
   contact: {
     label: 'כתבו לנו בערוץ הנוח לכם',
-    channels: { whatsapp: 'WhatsApp', viber: 'Viber', telegram: 'Telegram' },
+    channels: { whatsapp: 'WhatsApp', instagram: 'Instagram', telegram: 'Telegram' },
   },
 
   facts: {
@@ -39,7 +39,7 @@ export default {
         value: 'בגריבנה, בדולר אמריקאי או בהעברה לכרטיס',
       },
       drivers: { label: 'נהגים', value: 'בעלי דרכונים רומניים ומולדוביים' },
-      booking: { label: 'הזמנה', value: 'אונליין 24/7 — Viber, WhatsApp, Telegram' },
+      booking: { label: 'הזמנה', value: 'אונליין 24/7 — WhatsApp, Instagram, Telegram' },
       coverage: { label: 'אזור האיסוף', value: 'כל אוקראינה — ערים וכפרים; אירופה לפי בקשה' },
       guarantee: { label: 'התחייבות', value: 'הגעה בזמן, ללא החלפות ותוספות תשלום' },
     },
@@ -64,7 +64,7 @@ export default {
         title: 'אזורי השירות: כל אוקראינה',
         paragraphs: [
           'אנחנו אוספים מכל עיר או כפר באוקראינה. למטה היעדים המבוקשים ביותר, אבל נוסעים לכל מקום — פשוט ציינו את היישוב.',
-          'להזמנה כתבו ב‑WhatsApp, ב‑Viber, ב‑Telegram או השאירו בקשה באתר: ציינו תאריך, שעה, מקום היציאה וסוג הרכב הרצוי.',
+          'להזמנה כתבו ב‑WhatsApp, ב‑Instagram, ב‑Telegram או השאירו בקשה באתר: ציינו תאריך, שעה, מקום היציאה וסוג הרכב הרצוי.',
         ],
         bullets: [
           'מרכז וצפון: קייב, ז׳יטומיר, צ׳רקסי, צ׳רניהיב, אומן',
@@ -104,7 +104,7 @@ export default {
     items: [
       {
         q: 'איך מזמינים הסעה לקישינב?',
-        a: 'כתבו ב‑WhatsApp, ב‑Viber, ב‑Telegram או השאירו בקשה באתר. ציינו תאריך, שעה, מקום היציאה וסוג הרכב הרצוי.',
+        a: 'כתבו ב‑WhatsApp, ב‑Instagram, ב‑Telegram או השאירו בקשה באתר. ציינו תאריך, שעה, מקום היציאה וסוג הרכב הרצוי.',
       },
       {
         q: 'כמה עולה הנסיעה?',
