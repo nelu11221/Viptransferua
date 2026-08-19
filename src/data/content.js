@@ -8,9 +8,11 @@ export const HERO_MEDIA = {
   maxFrames: 400,
 }
 
-// Replace with the real business number / Telegram handle before going live.
-export const PHONE = '+32470000000'
-export const PHONE_DISPLAY = '+32 470 00 00 00'
+// Drives the tel: link, the WhatsApp deep link and the Viber one, so it has to
+// stay in E.164 (no spaces). PHONE_DISPLAY is the grouped version shown to the
+// reader. The Telegram handle below is still the placeholder one.
+export const PHONE = '+37360133594'
+export const PHONE_DISPLAY = '+373 60 133 594'
 
 export const CHANNELS = [
   { id: 'whatsapp', href: `https://wa.me/${PHONE.replace('+', '')}` },
