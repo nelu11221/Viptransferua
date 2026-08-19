@@ -1,4 +1,4 @@
-import { FOOTER_COLUMNS } from '../data/content.js'
+import { FOOTER_COLUMNS, FOOTER_HREFS } from '../data/content.js'
 import { useLanguage } from '../i18n/LanguageContext.js'
 import LanguageSwitcher from './LanguageSwitcher.js'
 
@@ -29,7 +29,9 @@ export default function Footer() {
               <ul>
                 {column.items.map((item) => (
                   <li key={item}>
-                    <a href="#top">{t.footer.columns[column.id].items[item]}</a>
+                    <a href={FOOTER_HREFS[item] ?? '#top'}>
+                      {t.footer.columns[column.id].items[item]}
+                    </a>
                   </li>
                 ))}
               </ul>

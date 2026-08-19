@@ -1624,8 +1624,12 @@ ul {
     padding-bottom: 96px;
   }
 
+  /* No dissolve on phones. The stage already ends in rounded corners here, and
+     the 210px white gradient reached far enough up the screen that the last
+     rows of copy — white text — were sitting on white. The rounded edge is the
+     whole transition on mobile. */
   .hero__fade {
-    height: 210px;
+    display: none;
   }
 
   .hero__title {
@@ -1637,10 +1641,12 @@ ul {
   }
 
   /* Copy spans the full width here, so the scrim darkens top-down instead of
-     diagonally — otherwise text sits on the bright side of the frame. */
+     diagonally — otherwise text sits on the bright side of the frame. It stays
+     dark all the way down, because the copy runs to the bottom of the stage in
+     the longer languages. */
   .hero__scrim {
     background:
-      linear-gradient(to bottom, rgba(4, 12, 24, 0.9) 0%, rgba(4, 12, 24, 0.66) 55%, rgba(4, 12, 24, 0.3) 100%);
+      linear-gradient(to bottom, rgba(4, 12, 24, 0.9) 0%, rgba(4, 12, 24, 0.72) 55%, rgba(4, 12, 24, 0.82) 100%);
   }
 
   [dir='rtl'] .hero__scrim {
@@ -1776,5 +1782,124 @@ ul {
 
   .section__head {
     margin-bottom: 30px;
+  }
+}
+
+/* ==========================================================================
+   Legal pages (/privacy)
+   ========================================================================== */
+
+.legal {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.legal__bar {
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.legal__bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 16px;
+}
+
+.legal__body {
+  flex: 1;
+  padding-block: 56px 80px;
+}
+
+.legal__title {
+  margin: 0 0 8px;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: var(--navy-800);
+}
+
+.legal__updated {
+  margin: 0 0 28px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.legal__intro {
+  margin: 0 0 8px;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.legal__section {
+  margin-top: 36px;
+}
+
+.legal__heading {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--navy-800);
+}
+
+.legal__text {
+  margin: 0 0 12px;
+  line-height: 1.72;
+  color: var(--ink-soft);
+}
+
+.legal__list {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  /* Markers sit inside the text column so they mirror in Hebrew. */
+  padding-inline-start: 22px;
+  list-style: disc;
+}
+
+.legal__list li {
+  line-height: 1.66;
+  color: var(--ink-soft);
+}
+
+.legal__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 44px;
+  font-weight: 600;
+  color: var(--navy-800);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 3px;
+}
+
+.legal__back svg {
+  width: 17px;
+  height: 17px;
+}
+
+[dir='rtl'] .legal__back svg {
+  transform: scaleX(-1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .legal__back:hover {
+    border-color: var(--navy-700);
+  }
+}
+
+@media (max-width: 560px) {
+  .legal__body {
+    padding-block: 36px 56px;
+  }
+
+  .legal__section {
+    margin-top: 30px;
   }
 }

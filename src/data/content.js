@@ -105,6 +105,12 @@ export const EUROPE_COUNTRIES = [
   { id: 'france', code: 'FR' },
 ]
 
+// Footer items that lead somewhere real. Anything not listed here is a label
+// without a destination yet and falls back to the top of the page.
+export const FOOTER_HREFS = {
+  privacy: '/privacy/',
+}
+
 export const FOOTER_COLUMNS = [
   { id: 'directions', items: ['kyiv', 'odesa', 'lviv', 'kharkiv', 'chernivtsi'] },
   { id: 'services', items: ['airport', 'intercity', 'groups', 'return'] },
