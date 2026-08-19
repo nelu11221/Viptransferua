@@ -1583,8 +1583,16 @@ ul {
     border-bottom: 1px solid var(--line);
   }
 
+  /* The CTA label is long in Ukrainian and Russian, and .btn keeps it on one
+     line. Beside the language pill in a non-shrinking row it ran off the edge
+     of the panel, so let the row wrap and give the button a line of its own. */
   .nav.is-open .nav__actions {
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .nav.is-open .nav__actions .btn--dark {
+    flex: 1 1 100%;
   }
 
   .section {
