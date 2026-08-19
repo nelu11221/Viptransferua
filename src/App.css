@@ -92,10 +92,11 @@ ul {
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  /* Note: this shorthand also zeroes the vertical padding of elements that are
-     both .container and something else. The footer rules below compensate with
-     a more specific selector; the hero relies on the reset for its centring. */
-  padding: 0 24px;
+  /* Inline-only on purpose. Several elements are both .container and something
+     that sets its own vertical padding (.hero__inner, .footer__inner,
+     .footer__bottom); a `padding: 0 24px` shorthand silently zeroed theirs
+     whenever it won the cascade. */
+  padding-inline: 24px;
 }
 
 /* Buttons ---------------------------------------------------------------- */
@@ -361,7 +362,13 @@ ul {
      dissolve. The fade below ends in solid white instead. */
   isolation: isolate;
   display: flex;
+  /* `safe` matters: on a short or narrow screen the copy is taller than the
+     stage, and plain centring split the overflow evenly — pushing the eyebrow
+     and the top of the headline up underneath the fixed header. Safe centring
+     falls back to start alignment exactly when it would otherwise overflow.
+     The unprefixed line stays for browsers without `safe`. */
   align-items: center;
+  align-items: safe center;
 }
 
 .hero__canvas,
@@ -1518,8 +1525,10 @@ ul {
   }
 
   :root {
-    /* Shorter pinned stretch so the hero does not eat several phone screens. */
-    --hero-scroll: 90vh;
+    /* No pinned stretch on phones: the hero is a still image here, so there is
+       nothing to scrub and the extra scroll distance would just be dead space
+       before the first section. HeroScrollMedia matches on the same width. */
+    --hero-scroll: 0px;
   }
 
   .header {
@@ -1576,15 +1585,28 @@ ul {
   }
 
   /* Dynamic viewport units: the stage keeps its height when mobile browser
-     chrome slides in and out, so the pinned hero does not jump. */
+     chrome slides in and out, so the hero does not jump. Section and stage
+     have to agree, or the leftover difference becomes sticky travel. */
+  .hero,
   .hero__stage {
     height: 100svh;
+  }
+
+  .hero__stage {
     border-radius: 0 0 26px 26px;
   }
 
+  /* Drives a progress bar off --hero-progress, which no longer moves here. */
+  .hero__cue {
+    display: none;
+  }
+
+  /* Clears the floating header pill, which ends 72px down, with room to
+     breathe. The stage centres safely, so this doubles as the top stop when
+     the copy is taller than the screen and centring falls back to start. */
   .hero__inner {
-    padding-top: 76px;
-    padding-bottom: 120px;
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
 
   .hero__fade {
@@ -1632,7 +1654,7 @@ ul {
 
 @media (max-width: 560px) {
   .container {
-    padding: 0 16px;
+    padding-inline: 16px;
   }
 
   .header__inner {

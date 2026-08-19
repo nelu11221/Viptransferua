@@ -73,6 +73,27 @@ function frameStep() {
   return window.innerWidth <= 768 ? 2 : 1
 }
 
+/* Phones show the opening frame as a plain still: no pinning, no scrubbing,
+   one ~80 kB image instead of the ~50 the scrubbed version would pull down.
+   Matches the breakpoint where the CSS drops --hero-scroll to zero. */
+const STATIC_HERO_QUERY = '(max-width: 1040px)'
+
+function useStaticHero() {
+  const [isStatic, setIsStatic] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(STATIC_HERO_QUERY).matches,
+  )
+
+  useEffect(() => {
+    const query = window.matchMedia(STATIC_HERO_QUERY)
+    const onChange = (event) => setIsStatic(event.matches)
+    query.addEventListener('change', onChange)
+    setIsStatic(query.matches)
+    return () => query.removeEventListener('change', onChange)
+  }, [])
+
+  return isStatic
+}
+
 /** Loads frames in batches and stops at the first missing one. */
 async function loadFrames({ name, start, first }) {
   const BATCH = 24
@@ -137,10 +158,13 @@ export default function HeroScrollMedia() {
   // the node is attached — refs alone can still be null when effects fire.
   const [node, setNode] = useState(null)
   const framesRef = useRef([])
-  // 'gradient' → no media, 'canvas' → scrubbable frames, 'gif' → plain <img>
+  // 'gradient' → no media, 'canvas' → scrubbable frames, 'gif' → plain <img>,
+  // 'poster' → one still frame, the phone treatment
   const [mode, setMode] = useState('gradient')
+  const [poster, setPoster] = useState(null)
   // Bumped when the full sequence lands, to redraw with the real frame count.
   const [revision, setRevision] = useState(0)
+  const staticHero = useStaticHero()
 
   useEffect(() => {
     let cancelled = false
@@ -150,6 +174,13 @@ export default function HeroScrollMedia() {
       if (cancelled) return
 
       if (detected) {
+        if (staticHero) {
+          // Stop at the frame the probe already fetched — nothing else to pull.
+          setPoster(detected.name(detected.start))
+          setMode('poster')
+          return
+        }
+
         // Show frame one straight away, then swap in the whole sequence once
         // it has downloaded — no waiting on several megabytes before painting.
         framesRef.current = [detected.first]
@@ -164,6 +195,12 @@ export default function HeroScrollMedia() {
 
       const bytes = await fetchImageBytes(HERO_MEDIA.gif)
       if (cancelled || !bytes) return
+
+      // Nothing to scrub against on a phone, so skip the frame-by-frame decode.
+      if (staticHero) {
+        setMode('gif')
+        return
+      }
 
       const gifFrames = await decodeGif(bytes)
       if (cancelled) return
@@ -184,10 +221,14 @@ export default function HeroScrollMedia() {
       framesRef.current.forEach((frame) => frame?.close?.())
       framesRef.current = []
     }
-  }, [])
+  }, [staticHero])
 
   // Scroll → progress → canvas frame, on a single rAF loop.
   useEffect(() => {
+    // A still hero has nothing to drive: no scroll listener, no rAF, and
+    // --hero-progress stays at its 0 default.
+    if (mode === 'poster') return undefined
+
     const container = node?.closest('.hero')
     if (!container) return undefined
 
@@ -253,6 +294,19 @@ export default function HeroScrollMedia() {
     }
   }, [node, mode, revision])
 
+  if (mode === 'poster') {
+    return (
+      <img
+        className="hero__canvas"
+        ref={setNode}
+        src={poster}
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        decoding="async"
+      />
+    )
+  }
   if (mode === 'canvas') {
     return <canvas className="hero__canvas" ref={setNode} aria-hidden="true" />
   }
