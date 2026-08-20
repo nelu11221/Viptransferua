@@ -1,11 +1,11 @@
-import { SiInstagram, SiTelegram, SiWhatsapp } from 'react-icons/si'
+import { SiInstagram, SiViber, SiWhatsapp } from 'react-icons/si'
 import { CHANNELS } from '../data/content.js'
 import { useLanguage } from '../i18n/LanguageContext.js'
 
 const ICONS = {
   whatsapp: SiWhatsapp,
   instagram: SiInstagram,
-  telegram: SiTelegram,
+  viber: SiViber,
 }
 
 export default function ContactChannels({ variant = 'hero' }) {

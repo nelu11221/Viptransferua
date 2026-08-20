@@ -639,7 +639,7 @@ ul {
 }
 
 /* ==========================================================================
-   Contact channels (WhatsApp / Instagram / Telegram)
+   Contact channels (WhatsApp / Instagram / Viber)
    ========================================================================== */
 
 .channels {
@@ -693,8 +693,8 @@ ul {
   background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
 }
 
-.channel--telegram {
-  background: #229ed9;
+.channel--viber {
+  background: #7360f2;
 }
 
 /* ==========================================================================

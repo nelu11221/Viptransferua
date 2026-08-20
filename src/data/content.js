@@ -14,15 +14,15 @@ export const PHONE = '+37360133594'
 export const PHONE_DISPLAY = '+373 60 133 594'
 
 // WhatsApp is the account's own short link rather than a wa.me/<number> one,
-// so it stays correct even if PHONE changes. The Telegram handle is still the
-// placeholder one.
+// so it stays correct even if PHONE changes. The Viber deep link carries its
+// own number, which is not the same as PHONE.
 export const CHANNELS = [
   { id: 'whatsapp', href: 'https://wa.me/message/EFS3IQ57CZJ2L1' },
   {
     id: 'instagram',
     href: 'https://www.instagram.com/luxtransferua?igsh=aDJxN2wwYXRlOWI4',
   },
-  { id: 'telegram', href: 'https://t.me/transporttransfers' },
+  { id: 'viber', href: 'viber://chat?number=%2B4915211237047' },
 ]
 
 // Fleet gallery photos, in public/fleet/. Image-only cards — no captions.
