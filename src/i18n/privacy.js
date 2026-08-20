@@ -5,7 +5,9 @@
  * The site is run by a private individual, not a company, so the controller
  * is a named person rather than a registered entity. The bracketed
  * placeholders MUST be filled in — a GDPR notice without a named controller
- * and a working contact address does not satisfy Art. 13. Everything else here describes what the site actually does today:
+ * and a working contact address does not satisfy Art. 13.
+ *
+ * Everything else here describes what the site actually does today:
  * no cookies, no analytics, one localStorage key, Google Fonts from Google's
  * CDN, and messenger deep links.
  */
