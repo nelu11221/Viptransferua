@@ -1601,12 +1601,15 @@ ul {
     padding: 64px 0;
   }
 
-  /* Dynamic viewport units: the stage keeps its height when mobile browser
-     chrome slides in and out, so the hero does not jump. Section and stage
-     have to agree, or the leftover difference becomes sticky travel. */
+  /* One screen tall as a floor, not a ceiling. The hero is a still image on
+     phones, so nothing needs it pinned to the viewport — and locking it to
+     100svh clipped the last rows of copy off the bottom on shorter screens
+     and in the wordier languages. Section and stage stay in step, or the
+     leftover difference would become sticky travel. */
   .hero,
   .hero__stage {
-    height: 100svh;
+    height: auto;
+    min-height: 100svh;
   }
 
   .hero__stage {
