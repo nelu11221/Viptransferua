@@ -1130,88 +1130,173 @@ ul {
 }
 
 /* ==========================================================================
-   Popular routes
+   Popular routes — direction picker
    ========================================================================== */
 
-.routes {
-  display: grid;
-  gap: 12px;
-}
-
-/* One row per city: outbound left, return right. */
-.routes__pair {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.route {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+.picker {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  transition: border-color 0.16s ease, transform 0.16s ease;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 24px 50px -34px rgba(7, 20, 38, 0.5);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .route:hover {
-    border-color: var(--navy-700);
-    transform: translateY(-2px);
-  }
+/* The swap button sits between the two fields and keeps its own width. */
+.picker__fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 12px;
 }
 
-.route__path {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+.picker__field {
+  display: grid;
+  gap: 7px;
   min-width: 0;
-  font-weight: 600;
-  color: var(--navy-800);
 }
 
-.route__from {
-  background: var(--surface-2);
-  border-radius: var(--radius-sm);
-  padding: 4px 9px;
+.picker__label {
   font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--ink-soft);
 }
 
-.route__to {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+/* Native select on purpose: phones get their own wheel picker, which beats
+   any custom dropdown for a 23-item list. Only the chrome is restyled. */
+.picker__select {
+  appearance: none;
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--navy-800);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 13px 40px 13px 16px;
+  cursor: pointer;
+  transition: border-color 0.16s ease;
+  /* Chevron drawn in the box so no extra element is needed. */
+  background-image: linear-gradient(45deg, transparent 50%, currentcolor 50%),
+    linear-gradient(135deg, currentcolor 50%, transparent 50%);
+  background-size: 6px 6px, 6px 6px;
+  background-position: right 18px center, right 12px center;
+  background-repeat: no-repeat;
 }
 
-.route__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
+[dir='rtl'] .picker__select {
+  padding: 13px 16px 13px 40px;
+  background-position: left 12px center, left 18px center;
+}
+
+.picker__select:focus-visible {
+  outline: 2px solid var(--navy-700);
+  outline-offset: 2px;
+}
+
+.picker__swap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
   flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--navy-800);
+  padding: 0;
+  transition: background-color 0.16s ease, border-color 0.16s ease;
 }
 
-.route__price {
-  font-weight: 700;
+.picker__swap svg {
+  width: 18px;
+  height: 18px;
+}
+
+.picker__result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.picker__price {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.picker__price-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.picker__price-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   color: var(--navy-800);
   font-variant-numeric: tabular-nums;
 }
 
-.route__price small {
-  font-size: 0.72rem;
+.picker__price-value small {
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--ink-soft);
 }
 
-.route__request {
-  font-size: 0.85rem;
-  font-weight: 600;
+.picker__request {
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--ink-soft);
-  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .picker__select:hover,
+  .picker__swap:hover {
+    border-color: var(--navy-700);
+  }
+
+  .picker__swap:hover {
+    background: var(--surface-2);
+  }
+}
+
+@media (max-width: 560px) {
+  .picker {
+    padding: 20px;
+  }
+
+  /* Stack the fields; the swap button turns into a full-width row between
+     them so it keeps a comfortable tap target. */
+  .picker__fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .picker__swap {
+    width: 100%;
+    height: 44px;
+    border-radius: var(--radius);
+  }
+
+  .picker__result {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .picker__result .btn {
+    width: 100%;
+    min-height: 46px;
+  }
 }
 
 .vehicle__request {
@@ -1476,13 +1561,6 @@ ul {
   flex-shrink: 0;
 }
 
-.route__arrow {
-  width: 17px;
-  height: 17px;
-  flex-shrink: 0;
-  color: var(--ink-soft);
-}
-
 .faq__sign {
   width: 17px;
   height: 17px;
@@ -1503,7 +1581,6 @@ ul {
   letter-spacing: 0;
 }
 
-[dir='rtl'] .route__arrow,
 [dir='rtl'] .vehicle__icon {
   transform: scaleX(-1);
 }
@@ -1658,10 +1735,6 @@ ul {
     transform: none;
   }
 
-  .routes__pair {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .footer__columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1752,12 +1825,6 @@ ul {
 
   .vehicles {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .route {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
 
   .cta__inner {

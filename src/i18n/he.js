@@ -152,6 +152,10 @@ export default {
   routes: {
     title: 'יעדים אוקראינה ⇄ קישינב',
     subtitle: 'נוסעים בשני הכיוונים. המחירים הם מחירי פתיחה לרכב במחלקת סטנדרט.',
+    pickFrom: 'מאיפה',
+    pickTo: 'לאן',
+    swap: 'החלפת כיוון הנסיעה',
+    priceLabel: 'עלות הנסיעה',
     cities: {
       chisinau: 'קישינב',
       vinnytsia: 'ויניצה',
