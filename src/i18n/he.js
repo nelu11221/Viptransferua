@@ -156,6 +156,9 @@ export default {
     pickTo: 'לאן',
     swap: 'החלפת כיוון הנסיעה',
     priceLabel: 'עלות הנסיעה',
+    waCta: 'לכתוב ב-WhatsApp',
+    waMessage: 'שלום! אני מעוניין להזמין הסעה {from} ← {to}. באתר מופיע מחיר החל מ-{price}.',
+    waMessageOnRequest: 'שלום! אני מעוניין להזמין הסעה {from} ← {to}. אשמח לדעת את המחיר.',
     cities: {
       chisinau: 'קישינב',
       vinnytsia: 'ויניצה',

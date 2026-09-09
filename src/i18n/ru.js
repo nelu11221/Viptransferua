@@ -156,6 +156,9 @@ export default {
     pickTo: 'Куда',
     swap: 'Поменять направление местами',
     priceLabel: 'Стоимость поездки',
+    waCta: 'Написать в WhatsApp',
+    waMessage: 'Здравствуйте! Хочу заказать трансфер {from} → {to}. На сайте указана цена от {price}.',
+    waMessageOnRequest: 'Здравствуйте! Хочу заказать трансфер {from} → {to}. Подскажите, пожалуйста, стоимость.',
     cities: {
       chisinau: 'Кишинёв',
       vinnytsia: 'Винница',

@@ -16,6 +16,17 @@ export const PHONE_DISPLAY = '+373 60 133 594'
 // WhatsApp is the account's own short link rather than a wa.me/<number> one,
 // so it stays correct even if PHONE changes. The Viber deep link carries its
 // own number, which is not the same as PHONE.
+
+// The short link above cannot carry a prefilled message: wa.me drops a ?text=
+// parameter when it redirects to api.whatsapp.com/message/<code> (verified).
+// A chat opened with text ready to send has to address the number directly,
+// which is why the route picker builds its own link from this.
+export const WHATSAPP_NUMBER = '37360133594'
+
+export function whatsappChat(message) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
 export const CHANNELS = [
   { id: 'whatsapp', href: 'https://wa.me/message/EFS3IQ57CZJ2L1' },
   {

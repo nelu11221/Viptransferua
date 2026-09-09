@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react'
 import { LuArrowLeftRight } from 'react-icons/lu'
-import { CHANNELS, ROUTE_CITIES } from '../data/content.js'
+import { SiWhatsapp } from 'react-icons/si'
+import { ROUTE_CITIES, whatsappChat } from '../data/content.js'
 import { useLanguage } from '../i18n/LanguageContext.js'
 import { money } from '../i18n/format.js'
 import SectionHead from './SectionHead.js'
-
-const WHATSAPP = CHANNELS.find((c) => c.id === 'whatsapp').href
 
 // Every published fare runs to or from Chișinău, so a valid pair always has it
 // on exactly one side. Picking a city on one side pins the other to the hub.
@@ -33,6 +32,15 @@ export default function PopularRoutes() {
   )
 
   const price = PRICES.get(from === HUB ? to : from)
+  const quoted = price !== null && price !== undefined
+
+  // Opens WhatsApp with the chosen direction already typed, so the customer
+  // only has to hit send. Falls back to asking for a quote where there is no
+  // published fare.
+  const message = (quoted ? t.routes.waMessage : t.routes.waMessageOnRequest)
+    .replace('{from}', t.routes.cities[from])
+    .replace('{to}', t.routes.cities[to])
+    .replace('{price}', quoted ? money(language.locale, price) : '')
 
   function pickFrom(value) {
     setFrom(value)
@@ -109,7 +117,7 @@ export default function PopularRoutes() {
               <span className="picker__price-label">{t.routes.priceLabel}</span>
               {/* aria-live so the figure is announced when a selection changes. */}
               <span className="picker__price-value" aria-live="polite">
-                {price === null || price === undefined ? (
+                {!quoted ? (
                   <span className="picker__request">{t.units.onRequest}</span>
                 ) : (
                   <>
@@ -120,8 +128,14 @@ export default function PopularRoutes() {
               </span>
             </div>
 
-            <a className="btn btn--dark" href={WHATSAPP} target="_blank" rel="noreferrer">
-              {t.nav.book}
+            <a
+              className="btn picker__cta"
+              href={whatsappChat(message)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <SiWhatsapp aria-hidden="true" />
+              {t.routes.waCta}
             </a>
           </div>
         </div>

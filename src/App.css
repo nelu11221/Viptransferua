@@ -1259,6 +1259,22 @@ ul {
   color: var(--ink-soft);
 }
 
+/* WhatsApp green, so it is obvious where the button leads before it is tapped. */
+.picker__cta {
+  background: #25d366;
+  color: #05301a;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 13px 24px;
+  gap: 10px;
+}
+
+.picker__cta svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .picker__select:hover,
   .picker__swap:hover {
@@ -1267,6 +1283,10 @@ ul {
 
   .picker__swap:hover {
     background: var(--surface-2);
+  }
+
+  .picker__cta:hover {
+    filter: brightness(1.06);
   }
 }
 
